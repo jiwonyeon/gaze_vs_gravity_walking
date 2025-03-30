@@ -94,6 +94,7 @@ class saccade_filter():
         mask_dur = self._filtering('amp_dur_res')
         
         filter_res = [mask & mask_vel & mask_dur]        
+        filter_res = filter_res[0]
         self.filter_res = filter_res
         
         return filter_res
@@ -108,7 +109,7 @@ class saccade_filter():
         # plot saccade data point
         x = getattr(self, a)
         y = getattr(self, b)
-        mask = np.concatenate(np.array(self.filter_res))
+        mask = self.filter_res
         ax.scatter(x[~mask], y[~mask])
         ax.scatter(x[mask], y[mask], color='y')
         
